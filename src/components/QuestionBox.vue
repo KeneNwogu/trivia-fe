@@ -1,16 +1,16 @@
 <template>
 	<div class="question-box">
 		<div>
-			<StopTimer
-				:wrong="true"
-				:time="time"
-				:Counter="Counter"
-				:forceWrong="forceWrong"
-				:question="question"
-				:timer="timer"
-			/>
-
 			<div class="question">
+
+				<StopTimer
+					:wrong="true"
+					:time="time"
+					:Counter="Counter"
+					:forceWrong="forceWrong"
+					:question="question"
+					:timer="timer"
+				/>
 				<h3 v-html="question.question"></h3>
 				<ul>
 					<button
@@ -60,7 +60,7 @@
 				correct_answer_index: null,
 				correct_answer: null,
 				time: 5,
-				timer: undefined
+				timer: undefined,
 			};
 		},
 
@@ -145,7 +145,6 @@
 						this.time -= 0.5;
 					}, 500);
 				}
-
 			},
 			isCorrect: function (index) {
 				if (
@@ -164,6 +163,8 @@
 <style>
 .question-box {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	min-height: 100vh;
 	margin: 0;
 	color: rgba(97, 97, 220, 0.809);
@@ -173,10 +174,11 @@
 	text-align: center;
 	background-color: white;
 	width: 40vw;
-	height: 60vh;
+	height: fit-content;
 	margin: auto;
 	display: flex;
 	border-radius: 23px;
+	padding: 40px;
 }
 
 .question-box > div > div {
