@@ -2,33 +2,31 @@
 	<div class="question-box">
 		<div>
 			<div class="question">
-
 				<StopTimer
+					v-if="timer"
 					:wrong="true"
 					:time="time"
-					:Counter="Counter"
-					:forceWrong="forceWrong"
+					:counter="Counter"
+					:force-wrong="forceWrong"
 					:question="question"
 					:timer="timer"
 				/>
-				<h3 v-html="question.question"></h3>
+				<h3 v-html="question.question" />
 				<ul>
 					<button
 						v-for="(answer, index) in answers"
 						:key="index"
-						@click="this.selectAnswer(index)"
 						:class="[
 							isCorrect(index) ? 'correct' : '',
-							this.isWrong(index) ? 'wrong' : '',
+							isWrong(index) ? 'wrong' : '',
 						]"
-						:disabled="this.wrong"
+						:disabled="wrong"
+						@click="selectAnswer(index)"
 					>
-						<li v-html="answer" class="answer"></li>
+						<li class="answer" v-html="answer" />
 					</button>
 
-					<button v-if="this.wrong" @click="this.tryAgain()">
-						Try again?
-					</button>
+					<button v-if="wrong" @click="tryAgain()">Try again?</button>
 				</ul>
 			</div>
 		</div>
@@ -36,7 +34,7 @@
 </template>
 
 <script>
-	import StopTimer from "./StopTimer.vue";
+	import StopTimer from "../components/StopTimer.vue";
 	export default {
 		name: "QuestionBox",
 		components: {
@@ -160,7 +158,8 @@
 		},
 	};
 </script>
-<style>
+<style scoped>
+
 .question-box {
 	display: flex;
 	flex-direction: column;

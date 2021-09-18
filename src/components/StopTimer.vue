@@ -1,9 +1,9 @@
 <template>
-	<div class="timer">
-		<h3 v-if="started">
-			{{ timeFloor }}
-		</h3>
-	</div>
+  <div class="timer">
+    <h3 v-if="started">
+      {{ timeFloor }}
+    </h3>
+  </div>
 </template>
 
 
@@ -56,7 +56,7 @@
 	};
 </script>
 
-<style>
+<style scoped>
 :root {
 	--bg-color: #34495e;
 	--default-size: 1em;

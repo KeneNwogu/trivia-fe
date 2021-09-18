@@ -1,20 +1,22 @@
 <template>
-    <nav>
-        <ul>
-            <li class="hearts">
-                <span id="heart-icon">
-                    <div class="heart">
-                         
-                    </div>
-                </span>
-                <span>
-                    5
-                </span>
-            </li>
-            <li class="logo"><h1>TQ</h1></li>
-            <li class="score">{{ score }}</li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li class="hearts">
+        <span id="heart-icon">
+          <div class="heart" />
+        </span>
+        <span>
+          5
+        </span>
+      </li>
+      <li class="logo">
+        <h1>TQ</h1>
+      </li>
+      <li class="score">
+        {{ score }}
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -25,8 +27,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
     nav ul{
         display: flex;
         align-items: center;
