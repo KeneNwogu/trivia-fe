@@ -1,3 +1,4 @@
+import router from '../router'
 export default {
     GET_QUESTIONS: (state) => {
         let questions = fetch("https://opentdb.com/api.php?amount=10", {
@@ -23,7 +24,7 @@ export default {
             alert("Successfully registered user");
             console.log(data);
 
-            this.$router.push('Login');
+            router.push('/login');
         })).catch(err => alert(err.message));
         
     },
@@ -50,7 +51,7 @@ export default {
             console.log(state.user);
 
             // redirect
-            this.$router.push('User');
+            router.push('/account');
         })).catch(err => alert(err.message));
     },
     UPDATE_USER: (state, payload) => {
