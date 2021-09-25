@@ -1,26 +1,29 @@
 <template>
-	<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-	<!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
 	<NavBar :score="score" />
-	<QuestionBox
-		v-if="questions.length"
-		:question="questions[currentQuestionIndex]"
-		:score="score"
-		:next="next"
-		:selectAnswer="selectAnswer"
-		:addScore="addScore"
-		:tryAgain="tryAgain"
-		:isWrong="isWrong"
-		:wrong="wrong"
-		:selected_answer_index="selected_answer_index"
-		:resetSelectAnswer="resetSelectAnswer"
-		:forceWrong="forceWrong"
-	/>
+	<div class="container" v-if="user && Object.keys(user).length != 0 && user.hearts > 0">
+		<QuestionBox
+			v-if="questions.length"
+			:question="questions[currentQuestionIndex]"
+			:score="score"
+			:next="next"
+			:selectAnswer="selectAnswer"
+			:addScore="addScore"
+			:tryAgain="tryAgain"
+			:isWrong="isWrong"
+			:wrong="wrong"
+			:selected_answer_index="selected_answer_index"
+			:resetSelectAnswer="resetSelectAnswer"
+			:forceWrong="forceWrong"
+		/>
+	</div>
+
+	<div style="margin: 0; min-height: 50vh" class="d-flex" v-if="!(user.hearts > 0)">
+        <h3 style="color: red; margin: auto">You have run out of hearts</h3>
+	</div>
 </template>
 
 <script>
-	// import { mapActions } from 'vuex';
-	//
+	require("../static/css/bootstrap.min.css");
 	import QuestionBox from "../components/QuestionBox.vue";
 	import NavBar from "../components/NavBar.vue";
 
@@ -29,11 +32,10 @@
 		components: {
 			NavBar,
 			QuestionBox,
-			
 		},
 		data() {
 			return {
-				questions: [], // array of question objects  Question: {name:str, answers:[]}
+				// questions: [],
 				currentQuestionIndex: 0,
 				score: 0,
 				highScore: 0,
@@ -42,19 +44,29 @@
 			};
 		},
 
-		mounted: function(){
-			this.$store.dispatch('getQuestions')
+		mounted: function () {
+			this.$store.dispatch("getQuestions");
 			this.questions = this.$store.state.questions;
 		},
 
 		watch: {
 			currentQuestionIndex: {
 				handler: function () {
-					if (this.currentQuestionIndex == 10) {
+					if (this.currentQuestionIndex == 8) {
 						this.fetchMoreQuestions();
+						this.currentQuestionIndex = 0;
 					}
 				},
 			},
+		},
+
+		computed: {
+			questions() {
+				return this.$store.state.questions;
+			},
+			user(){
+				return this.$store.state.user;
+			}
 		},
 
 		methods: {
@@ -65,15 +77,7 @@
 			fetchMoreQuestions: function () {
 				this.wrong = null;
 				this.selected_answer_index = null;
-				fetch("http://127.0.0.1:5000/api/questions/?amount=10", {
-					method: "GET",
-					crossDomain: true,
-				}).then((response) =>
-					response.json().then((data) => {
-						this.questions = data;
-						this.currentQuestionIndex = 0;
-					})
-				);
+				this.$store.dispatch("getQuestions");
 			},
 
 			resetSelectAnswer: function () {
@@ -92,17 +96,30 @@
 			tryAgain: function () {
 				this.wrong = null;
 				this.selected_answer_index = null;
+
+				// update user's high score
+				if (this.$store.state.user.hearts > 0) {
+					if (this.score > this.$store.state.user.high_score) {
+						const payload = {
+							high_score: this.score,
+							hearts: this.$store.state.user.hearts - 1,
+						};
+						this.$store.dispatch("updateUser", payload);
+					} else {
+						const payload = {
+							hearts: this.$store.state.user.hearts - 1,
+						};
+						this.$store.dispatch("updateUser", payload);
+					}
+				}
+				else{
+					alert("You have run out of hearts!!!");
+				}
+
 				this.score = 0;
 
-				fetch("http://127.0.0.1:5000/api/questions/?amount=10", {
-					method: "GET",
-					crossDomain: true,
-				}).then((response) =>
-					response.json().then((data) => {
-						this.questions = data;
-						this.currentQuestionIndex = 0;
-					})
-				);
+				this.$store.dispatch("getQuestions");
+				this.questions = this.$store.state.questions;
 			},
 
 			isWrong: function (index) {
@@ -124,7 +141,6 @@
 </script>
 
 <style scoped>
-
 #app {
 	font-family: Avenir, Helvetica, Arial;
 	-webkit-font-smoothing: antialiased;

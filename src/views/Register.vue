@@ -1,18 +1,18 @@
 <template>
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-lg-6">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
 				<h2>Register</h2>
 				<form method="get" @submit.prevent.self="register">
-					<div class="form-group">
+					<div class="form-group pad">
 						<label class="form-label" for="name">Name</label>
 						<input class="form-control" type="text" name="name" />
 					</div>
-					<div class="form-group">
+					<div class="form-group pad">
 						<label class="form-label" for="email">Email</label>
 						<input class="form-control" type="email" name="email" />
 					</div>
-					<div class="form-group">
+					<div class="form-group pad">
 						<label class="form-label" for="password"
 							>Password</label
 						>
@@ -32,12 +32,10 @@
 							name="confirm-password"
 						/>
 					</div>
-
-					<button
-						class="btn-submit btn-primary rounded"
-						value="Register"
-						@click.prevent="register"
-					>Register</button>
+                    <div class="pad">
+                       <button class="btn-submit btn-primary rounded" value="Register" @click.prevent="register">Register</button>
+					</div>
+					<p>Already have an account? Login <router-link to="/login">here</router-link></p>
 				</form>
 			</div>
 		</div>
@@ -76,6 +74,6 @@
 /* @import "../static/css/bootstrap.min.css"; */
 
 .pad {
-	padding-bottom: 10px;
+	margin-bottom: 0.75rem;
 }
 </style>

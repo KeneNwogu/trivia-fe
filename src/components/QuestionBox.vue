@@ -1,7 +1,10 @@
 <template>
-	<div class="question-box">
-		<div>
-			<div class="question">
+    <div class="text-center">
+		<p>Current score: {{ score }}</p>
+	</div>
+	<div class="container">
+		<div class="row justify-content-center" style="margin-top: 20px">
+			<div class="question col-lg-6">
 				<StopTimer
 					v-if="timer"
 					:wrong="true"
@@ -34,6 +37,7 @@
 </template>
 
 <script>
+    require('../static/css/bootstrap.min.css');
 	import StopTimer from "../components/StopTimer.vue";
 	export default {
 		name: "QuestionBox",
@@ -208,5 +212,8 @@ ul > button {
 
 .wrong {
 	background-color: #bb6868;
+}
+button{
+	outline: none;
 }
 </style>

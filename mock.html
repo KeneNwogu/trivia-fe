@@ -5,153 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TQ- Online Trivia</title>
-
-    <style>
-        body{
-            margin: 0;
-            background-image: linear-gradient(rgb(163, 163, 230), rgb(241, 178, 189));
-        }
-        nav ul{
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            margin: auto;
-        }
-
-        nav h1{
-            color: white;
-        }
-
-        .logo{
-            position: relative;
-            left: -3vw;
-        }
-        .question-box{
-            display: flex;
-            min-height: 100vh;
-            margin: 0;
-            color: rgba(97, 97, 220, 0.809);
-
-        }
-
-        .question-box > div{
-            text-align: center;
-            background-color: white;
-            width: 40vw;
-            height: 60vh;
-            margin: auto;
-            display: flex;
-            border-radius: 23px;
-        }
-
-        .question-box > div > div{
-            margin: auto;
-        }
-
-
-        ul{
-            /* text-align: center; */
-            list-style: none;
-        }
-
-        ul > button{
-            position: relative;
-            right: 27px;
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border: 1px solid gray;
-            margin-bottom: 12px;
-            border-radius: 23px;
-            background-color: inherit;
-            cursor: pointer;
-        }
-    
-        .hearts{
-            font-size: 1.5em;
-            width: 5vw;
-            text-align: right;
-            padding: 10px;
-            background-color: white;
-            border-radius: 30px;
-            color: red;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .score{
-            padding: 10px;
-            background-color: white;
-            border-radius: 30px;
-        }
-
-        .heart{
-            position: relative;
-            width: 26px;
-            height: 23px;
-            top: 2px;
-        }
-
-        .heart::before, .heart::after{
-            content: "";
-            background: #F9B3B3;
-            position: absolute;
-            top: 0;
-            width: 13px;
-            height: 18px;
-            border-radius: 50% 50% 0 0;
-        }
-        .heart::before{
-            transform: rotate(-45deg);
-            transform-origin: 0 100%;
-            left: 12px;
-        }
-
-        .heart::after{
-            left: 0;
-            transform: rotate(45deg);
-            transform-origin: 100% 100%;
-        }
-
-
-        ::-webkit-scrollbar{
-            display: none;
-        }
-    </style>
-</head>
-
+    <link href="/bootstrap.min.css" type="text/css">
 <body>
-    <nav>
-        <ul>
-            <li class="hearts">
-                <span id="heart-icon">
-                    <div class="heart">
-                         
-                    </div>
-                </span>
-                <span>
-                    5
-                </span>
-            </li>
-            <li class="logo"><h1>TQ</h1></li>
-            <li class="score">50</li>
-        </ul>
-    </nav>
+    <div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<h2>Register</h2>
+				<form method="get" @submit.prevent.self="register">
+					<div class="form-group">
+						<label class="form-label" for="name">Name</label>
+						<input class="form-control" type="text" name="name" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="email">Email</label>
+						<input class="form-control" type="email" name="email" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="password"
+							>Password</label
+						>
+						<input
+							class="form-control"
+							type="password"
+							name="password"
+						/>
+					</div>
+					<div class="form-group pad">
+						<label class="form-label" for="confirm-password"
+							>Confirm Password</label
+						>
+						<input
+							class="form-control"
+							type="password"
+							name="confirm-password"
+						/>
+					</div>
 
-    <div class="question-box">
-        <div>
-            <div class="question">
-                <h3>What is the name of the third Hokage?</h3>
-                <ul>
-                    <button><li class="answer">Minato Namikaze</li></button>
-                    <button><li class="answer">Jiraiya</li></button>
-                    <button><li class="answer">Tsunade</li></button>
-                    <button><li class="answer">Tobirama Senju</li></button>
-                </ul>
-            </div>
-        </div>
-    </div>
+					<button
+						class="btn-submit btn-primary rounded"
+						value="Register"
+						@click.prevent="register"
+					>Register</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -7,5 +7,11 @@ export default {
     },
     loginUser: (context, payload) => {
         context.commit("LOGIN_USER", payload);
+    },
+    updateUser: ({commit}, payload) => {
+        commit("UPDATE_USER", payload);
+    },
+    logoutUser: (context) => {
+        context.commit("LOGOUT_USER");
     }
 }

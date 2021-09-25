@@ -1,19 +1,22 @@
 <template>
 	<div class="container">
-		<div class="row">
+		<div class="row justify-content-center">
 			<div class="col-12 col-lg-6">
-				<h2>Register</h2>
-				<form method="get" @submit.prevent.self="register">
-					<div class="form-group">
+				<h2>Login</h2>
+				<form method="get" @submit.prevent.self="login">
+					<div class="form-group pad">
 						<label class="form-label" for="name">Name</label>
 						<input class="form-control" type="text" name="name" />
 					</div>
-					<div class="form-group">
+					<div class="form-group pad">
 						<label class="form-label" for="password">Password</label>
 						<input class="form-control" type="password" name="password"/>
 					</div>
-					<button class="btn-submit btn-primary rounded" @click.prevent="login">Login</button>
+					<div class="pad">
+                        <button class="btn-submit btn-primary rounded" @click.prevent="login">Login</button>
+					</div>
 				</form>
+				<p>Don't have an account? Register <router-link to="/register">here</router-link></p>
 			</div>
 		</div>
 	</div>
@@ -33,16 +36,18 @@ export default {
             let password = document.querySelector('input[name="password"]').value;
 
             const payload = {
-					username,
-					password,
+				username,
+				password,
 			}
 
-            this.$store.dispatch('registerUser', payload);
+            this.$store.dispatch('loginUser', payload);
         }
     }
 }
 </script>
 
 <style scoped>
-
+.pad {
+	margin-bottom: 0.75rem;
+}
 </style>
