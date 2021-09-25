@@ -4,7 +4,7 @@ export default {
 				method: "GET",
 				crossDomain: true,
 			}).then((response) =>
-			response.json().then((data) => (state.questions = data))
+			response.json().then((data) => (state.questions = data.results))
 		);
         // state.questions = questions;
         console.log(questions)
