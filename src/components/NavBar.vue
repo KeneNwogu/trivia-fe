@@ -8,9 +8,7 @@
 					</span>
 					<span> {{ hearts }} </span>
 				</li>
-				<li class="logo">
-					<h1>TQ</h1>
-				</li>
+				
 				<li class="score">High Score: {{ highScore }}</li>
 			</ul>
 		</nav>

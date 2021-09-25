@@ -1,6 +1,6 @@
 export default {
     GET_QUESTIONS: (state) => {
-        let questions = fetch("http://127.0.0.1:5000/api/questions/?amount=10", {
+        let questions = fetch("https://opentdb.com/api.php?amount=10", {
 				method: "GET",
 				crossDomain: true,
 			}).then((response) =>
@@ -11,7 +11,7 @@ export default {
     },
 
     REGISTER_USER: (state, payload) => {
-        fetch("http://127.0.0.1:5000/api/users/register/", {
+        fetch("https://kcee-trivia.herokuapp.com/api/users/register/", {
             method: 'POST',
             crossDomain: true,
             headers: {
@@ -21,13 +21,15 @@ export default {
         }).then((response) => response.json().then((data) => {
             state.messages.register_message = data;
             console.log(data);
-        }))
+
+            window.location.replace('/login');
+        })).catch(err => alert(err.message));
         
     },
 
     LOGIN_USER: (state, payload) => {
         console.log(payload)
-        fetch("http://127.0.0.1:5000/api/users/login/", {
+        fetch("https://kcee-trivia.herokuapp.com/api/users/login/", {
             method: 'POST',
             crossDomain: true,
             headers: {
@@ -44,11 +46,14 @@ export default {
             state.user.high_score = data.high_score;
             state.user.token = "Bearer " + data.token;
             console.log(state.user);
-        }))
+
+            // redirect
+            window.location.replace('/account');
+        })).catch(err => alert(err.message));
     },
     UPDATE_USER: (state, payload) => {
         let id = localStorage.getItem("user_id");
-        fetch(`http://127.0.0.1:5000/api/users/${id}/`, {
+        fetch(`https://kcee-trivia.herokuapp.com/api/users/${id}/`, {
             method: 'POST',
             crossDomain: true,
             headers: {

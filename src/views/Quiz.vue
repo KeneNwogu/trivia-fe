@@ -1,6 +1,6 @@
 <template>
 	<NavBar :score="score" />
-	<div class="container" v-if="user && Object.keys(user).length != 0 && user.hearts > 0">
+	<div class="container" v-if="!(user && Object.keys(user).length != 0) || user.hearts > 0">
 		<QuestionBox
 			v-if="questions.length"
 			:question="questions[currentQuestionIndex]"
@@ -17,7 +17,7 @@
 		/>
 	</div>
 
-	<div style="margin: 0; min-height: 50vh" class="d-flex" v-if="!(user.hearts > 0)">
+	<div style="margin: 0; min-height: 50vh" class="d-flex" v-if="user && Object.keys(user).length != 0 && !(user.hearts > 0)">
         <h3 style="color: red; margin: auto">You have run out of hearts</h3>
 	</div>
 </template>
@@ -112,7 +112,7 @@
 						this.$store.dispatch("updateUser", payload);
 					}
 				}
-				else{
+				else if(this.$store.state.user && this.$store.state.user.hearts <= 0){
 					alert("You have run out of hearts!!!");
 				}
 

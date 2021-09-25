@@ -19,7 +19,7 @@ export default {
     mounted: function () {
         console.log(this.$store.state.user)
         let id = localStorage.getItem('user_id');
-        fetch(`http://127.0.0.1:5000/api/users/${id}/`, {
+        fetch(`https://kcee-trivia.herokuapp.com/api/users/${id}/`, {
             method: 'GET',
             crossDomain: true,
             headers: {
