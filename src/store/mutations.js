@@ -22,7 +22,7 @@ export default {
             state.messages.register_message = data;
             console.log(data);
 
-            window.location.replace('/login');
+            window.location.replace('https://vuetify-trivia.netlify.app/login');
         })).catch(err => alert(err.message));
         
     },
@@ -48,7 +48,7 @@ export default {
             console.log(state.user);
 
             // redirect
-            window.location.replace('/account');
+            window.location.replace('https://vuetify-trivia.netlify.app/account');
         })).catch(err => alert(err.message));
     },
     UPDATE_USER: (state, payload) => {
