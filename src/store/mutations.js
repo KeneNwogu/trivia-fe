@@ -20,9 +20,10 @@ export default {
             body: JSON.stringify(payload)
         }).then((response) => response.json().then((data) => {
             state.messages.register_message = data;
+            alert("Successfully registered user");
             console.log(data);
 
-            window.location.replace('https://vuetify-trivia.netlify.app/login');
+            this.$router.push('Login');
         })).catch(err => alert(err.message));
         
     },
@@ -45,10 +46,11 @@ export default {
             state.user.hearts = data.hearts;
             state.user.high_score = data.high_score;
             state.user.token = "Bearer " + data.token;
+            alert("Successfully logged in");
             console.log(state.user);
 
             // redirect
-            window.location.replace('https://vuetify-trivia.netlify.app/account');
+            this.$router.push('User');
         })).catch(err => alert(err.message));
     },
     UPDATE_USER: (state, payload) => {
